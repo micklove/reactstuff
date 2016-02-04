@@ -16,5 +16,8 @@
     "src/app/components/",
     "test",
     "tests"
-  ]
+  ],
+  "devDependencies": {
+    "react": "~0.14.7"
+  }
 }
