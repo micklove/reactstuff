@@ -1,0 +1,7 @@
+node_modules
+package.json.old
+target
+dist
+.DS_Store
+thumbs.db
+*.log
