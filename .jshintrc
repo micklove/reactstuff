@@ -3,6 +3,7 @@
     "eqnull": true,
     "eqeqeq": false,
     "undef": true,
+    "nomen": false,
     "globals": {
         "jQuery": true
     }

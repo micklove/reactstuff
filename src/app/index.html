@@ -1,25 +1,74 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>React Stuff!</title>
-  </head>
-  <body>
-    
+<head>
+	<meta charset="UTF-8"/>
+	<title>React Stuff!</title>
 
-    <div id="app"></div>
+	<link rel="stylesheet" type="text/css" href="content/css/appstyle.css">
+
+</head>
+<body>
+	<div id="app">
+		<div id="otherheading"></div>
+
+		<!--<TextAreaCounter text="Hello World"/>-->
+
+	</div>
+
+	<script src="bower_components/react/react.js"></script>
+	<script src="bower_components/react/react-dom.js"></script>
+	<script src="bower_components/babel/browser.js"></script>
 
 
+	<script src="core/react-textarea.js" type="text/babel"></script>
+	<script type="text/babel">
 
-    <script src="bower_components/react/react.js"></script>
-    <script src="bower_components/react/react-dom.js"></script>
-    
-    <script>
-    	ReactDOM.render(
-    		React.DOM.h1(null, "Hello World!"),
-    		document.getElementById("app")
-    	);
-    </script>
+		//FB tutorial - https://facebook.github.io/react/docs/tutorial.html
+		//Examples https://github.com/reactjs/react-tutorial/blob/master/public/scripts/example.js
+		//React cheat sheet - http://ricostacruz.com/cheatsheets/react.html
 
-  </body>
+		//Render React component in the given Dom location
+		//React.render(reactWhat, domWhere)
+		//Built-in components are wrappers over regular DOM elements
+		// (e.g. React.DOM.div(attributes, children))
+//		ReactDOM.render(
+//			React.DOM.h1(
+//				{
+//					className: "my-heading",
+//					htmlFor:   "hello"
+//				},
+//				React.DOM.span(
+//					{
+//						style: {
+//							color: "red"
+//						},
+//						id:    "hello"
+//					}, "Hello"),
+//				" world!"
+//			), document.getElementById("app"));
+
+//		var MyComponet = React.createClass({
+//			render: function() {
+//				var name = this.props.name;
+//				var age = this.props.age;
+//				return React.DOM.h1(null, "My name is " + name + ", I am " + age);
+//			},
+//			propTypes: {
+//				name : React.PropTypes.string.isRequired,
+//				age : React.PropTypes.number
+//			}
+//		});
+//		ReactDOM.render(React.createElement(MyComponet, {
+//			name: "Blah",
+//			age : 25
+//		}), app);
+
+//		ReactDOM.render(React.createElement(TextAreaCounter, {text: "mick"}), app);
+
+	</script>
+	<!-- https://github.com/gruntjs/grunt-contrib-watch/blob/master/docs/watch-examples.md -->
+	<script src="//localhost:35729/livereload.js"></script>
+
+
+</body>
 </html>
