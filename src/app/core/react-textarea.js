@@ -1,6 +1,8 @@
 "use strict";
-/*global React, report, jslint */
+/*global React, report, jslint, console */
 /*jslint nomen: true, debug: true*/
+
+//TODO - add webStorage - https://www.npmjs.com/package/react-webstorage
 
 var TextAreaCounter = React.createClass({
 	propTypes: {
@@ -17,6 +19,11 @@ var TextAreaCounter = React.createClass({
 	},
 	_log: function(methodName, args) {
 		console.log(methodName, args);
+	},
+	componentWillReceiveProps: function(newProps) {
+		this.setState({
+		text: newProps.defaultValue
+		});
 	},
 	render:    function () {
 		//return React.DOM.div(null,

@@ -17,7 +17,10 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "react": "~0.14.7"
+  "dependencies": {
+    "react": "~0.14.7",
+    "react-webstorage": "git://github.com/sterpe/react-webstorage.git#0.0.3",
+    "jquery": "~2.2.0",
+    "babel": "*"
   }
 }

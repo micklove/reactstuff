@@ -1,5 +1,7 @@
 
 //http://gruntjs.com/sample-gruntfile
+var baseFolder = "src/app";
+var indexHtml = baseFolder + "/index.html";
 
 module.exports = function(grunt) {
 
@@ -29,7 +31,7 @@ module.exports = function(grunt) {
 			myserver: {
 				options: {
 					port: 8080,
-					base: 'src/app',
+					base: baseFolder,
 					livereload: true,
 					hostname: '*',
 					keepalive: false,
@@ -47,7 +49,7 @@ module.exports = function(grunt) {
 			},
 			myotherserver: {
 				port: 8001,
-				base: 'src/app',
+				base: baseFolder,
 				hostname: '*'
 				//e.g. grunt connect:myotherserver
 
@@ -94,6 +96,30 @@ module.exports = function(grunt) {
 				// Gets the port from the connect configuration
 				//path: 'http://localhost:<%= express.all.options.port%>'
 				path: 'http://someprodhost:<%= connect.options.port%>'
+			}
+		},
+
+		//update index.html with bower components
+		//See https://github.com/stephenplusplus/grunt-wiredep
+		// e.g. bower install jquery --save
+		//      grunt wiredep
+		//      (voila, index.html updated)
+		wiredep: {
+
+			task: {
+
+				// Point to the files that should be updated when
+				// you run `grunt wiredep`
+				src: [
+					indexHtml   // .html support...
+				],
+
+				options: {
+					// See wiredep's configuration documentation for the options
+					// you may pass:
+
+					// https://github.com/taptapship/wiredep#configuration
+				}
 			}
 		}
 	});
