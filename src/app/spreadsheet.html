@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>React Stuff!</title>
+
+	<link rel="stylesheet" type="text/css" href="content/css/appstyle.css">
+
+</head>
+<body>
+	<div id="app">
+		<div id="otherheading"></div>
+	</div>
+
+	<!-- don't remove the bower tags below, used by the 'grunt wiredep' to insert bower dependencies -->
+	<!-- bower:js -->
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/react/react-with-addons.js"></script>
+	<script src="bower_components/react/react-dom.js"></script>
+	<!-- endbower -->
+
+	<!-- TODO why is browser.js not picked up by grunt wiredep -->
+	<script src="bower_components/babel/browser.js"></script>
+
+	<!-- TODO - use cache breaker -->
+	<!-- https://github.com/shakyShane/grunt-cache-breaker -->
+	<script src="core/excel.js" type="text/babel"></script>
+
+	<!-- https://github.com/gruntjs/grunt-contrib-watch/blob/master/docs/watch-examples.md -->
+	<script src="//localhost:35729/livereload.js"></script>
+
+
+</body>
+</html>

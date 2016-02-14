@@ -15,7 +15,7 @@
 	<!-- don't remove the bower tags below, used by the 'grunt wiredep' to insert bower dependencies -->
 	<!-- bower:js -->
 	<script src="bower_components/jquery/dist/jquery.js"></script>
-	<script src="bower_components/react/react.js"></script>
+	<script src="bower_components/react/react-with-addons.js"></script>
 	<script src="bower_components/react/react-dom.js"></script>
 	<!-- endbower -->
 
@@ -24,9 +24,16 @@
 
 	<!-- TODO - use cache breaker -->
 	<!-- https://github.com/shakyShane/grunt-cache-breaker -->
+	<script src="core/mixins.js"></script>
+	<script src="core/counter.js"></script>
 	<script src="core/react-textarea.js" type="text/babel"></script>
 	<!--<script src="core/app.js" type="text/babel"></script>-->
-	<script type="text/babel">
+
+	<script>
+//		var app = document.getElementById("app");
+//		ReactDOM.render(React.createElement(TextAreaCounter, {
+//			defaultValue: "Hello World!"
+//		}), app);
 
 		//FB tutorial - https://facebook.github.io/react/docs/tutorial.html
 		//Examples https://github.com/reactjs/react-tutorial/blob/master/public/scripts/example.js
