@@ -11,31 +11,12 @@ var Excel = React.createClass({
 			//Use JSON methods to make a deep copy
 			data: JSON.parse(JSON.stringify(this.props.initialData)),
 			previousDataState: JSON.parse(JSON.stringify(this.props.initialData)),
-			sortby: null,
+			sortBy: null,
 			descending: false,
 			edit: null //{row: index, cell: index}
 		};
 	},
 
-	_sort: function(e) {
-		var column = e.target.cellIndex;
-		var descending = this.state.sortby === column && !this.state.descending;
-
-		//copy the data
-		var localData = this.state.data.slice();
-		localData.sort(function (a,b) {
-			var valA = a[column];
-			var valB = b[column];
-
-			return descending ? valA < valB : valA > valB;
-		});
-
-		this.setState({
-			data: localData,
-			sortby: column,
-			descending: descending
-		});
-	},
 
 	render: function() {
 		return React.DOM.div(null,
@@ -55,7 +36,7 @@ var Excel = React.createClass({
 						React.DOM.tr(null,
 							this.props.headers.map(function(title, idx) {
 
-								if (this.state.sortby === idx) {
+								if (this.state.sortBy === idx) {
 									title += this.state.descending ? ' \u2191' : ' \u2193';
 								}
 								return React.DOM.th({key: idx}, title);
@@ -114,13 +95,15 @@ var Excel = React.createClass({
 		});
 	},
 
+	/**
+	 * Reset, but allow undo (by saving previous state)
+	 * @private
+	 */
 	_reset: function () {
-		this._savePreviousState();
-
-		this.setState({
-			edit: null, // done editing
-			data: JSON.parse(JSON.stringify(this.props.initialData))
-		});
+		var previousDataState = JSON.parse(JSON.stringify(this.state.data));
+		var resetState = this.getInitialState();
+		resetState.previousDataState = previousDataState;
+		this.setState(resetState);
 	},
 
 	_save: function (e) {
@@ -133,6 +116,12 @@ var Excel = React.createClass({
 		//Save previous state, so that we can undo
 		this._savePreviousState();
 		data[this.state.edit.row][this.state.edit.cell] = input.value;
+
+		//Updated text may need to be sorted
+		if(this.state.sortBy) {
+			this._sortData(this.state.edit.cell, false);
+		}
+
 		this.setState({
 			edit: null, // done editing
 			data: data
@@ -150,7 +139,38 @@ var Excel = React.createClass({
 			}
 		});
 		//alert('row: ' + row + '\n' + 'cell: ' + cell);
+	},
+
+	_sort: function(e) {
+		this._sortData(e.target.cellIndex, true);
+	},
+
+	_sortData: function (cellIndex, toggleSort) {
+		var column = cellIndex;
+
+		var descending = this.state.sortBy === column;
+
+		if(toggleSort === true) {
+			descending = this.state.sortBy === column && !this.state.descending;
+		}
+
+		//deep copy the data
+		//var localData = this.state.data.slice();
+		var localData = JSON.parse(JSON.stringify(this.state.data));
+		console.log(localData);
+		localData.sort(function (a,b) {
+			var valA = a[column];
+			var valB = b[column];
+			return descending ? valA < valB : valA > valB;
+		});
+
+		this.setState({
+			data: localData,
+			sortBy: column,
+			descending: descending
+		});
 	}
+
 
 });
 
