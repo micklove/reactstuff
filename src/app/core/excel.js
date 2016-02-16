@@ -10,7 +10,7 @@ var Excel = React.createClass({
 		return {
 			//Use JSON methods to make a deep copy
 			data: JSON.parse(JSON.stringify(this.props.initialData)),
-			previousDataState: null,
+			previousDataState: JSON.parse(JSON.stringify(this.props.initialData)),
 			sortby: null,
 			descending: false,
 			edit: null //{row: index, cell: index}
@@ -38,53 +38,65 @@ var Excel = React.createClass({
 	},
 
 	render: function() {
+		return React.DOM.div(null,
+			this._renderTable(),
+			React.DOM.div({
+				className: 'excel-toolbar'
+			},
+			this._renderButton('UNDO', this._undo),
+			this._renderButton('RESET', this._reset)));
+	},
+
+	_renderTable: function() {
 		var self = this;
 		return (
-			React.DOM.div(null,
+				React.DOM.table(null,
+					React.DOM.thead({ onClick: this._sort},
+						React.DOM.tr(null,
+							this.props.headers.map(function(title, idx) {
 
-			React.DOM.table(null,
-				React.DOM.thead({ onClick: this._sort},
-					React.DOM.tr(null,
-						this.props.headers.map(function(title, idx) {
-
-							if (this.state.sortby === idx) {
-								title += this.state.descending ? ' \u2191' : ' \u2193';
-							}
-							return React.DOM.th({key: idx}, title);
-						}.bind(this))
-					)
-				),
-				React.DOM.tbody({onDoubleClick: self._showEditor}, self.state.data.map(function (row, rowidx) {
-					return (
-						React.DOM.tr({key: rowidx},
-							row.map(function (cell, idx) {
-								var content = cell;
-
-								// if the `idx` and the `rowidx` match the one being edited
-								// otherwise just show the text content
-								var edit = self.state.edit;
-
-								if (edit && edit.row === rowidx && edit.cell === idx) { // ...
-									content = React.DOM.form({onSubmit: self._save}, React.DOM.input({
-											type: 'text',
-											defaultValue: content
-										})
-									);
+								if (this.state.sortby === idx) {
+									title += this.state.descending ? ' \u2191' : ' \u2193';
 								}
-								return React.DOM.td({ key: idx,
-									'data-row': rowidx
-								}, content);
-							})
-						) );
-				}) )
-			), React.DOM.div(null,
-					React.DOM.button({onClick: function() {
-						self._undo();
-					}}, 'UNDO' ),
-					React.DOM.button({onClick: function() {
-						self._reset();
-					}}, 'RESET' ))
-		));
+								return React.DOM.th({key: idx}, title);
+							}.bind(this))
+						)
+					),
+					React.DOM.tbody({onDoubleClick: self._showEditor}, self.state.data.map(function (row, rowidx) {
+						return (
+							React.DOM.tr({key: rowidx},
+								row.map(function (cell, idx) {
+									var content = cell;
+
+									// if the `idx` and the `rowidx` match the one being edited
+									// otherwise just show the text content
+									var edit = self.state.edit;
+
+									if (edit && edit.row === rowidx && edit.cell === idx) { // ...
+										content = React.DOM.form({onSubmit: self._save}, React.DOM.input({
+												type: 'text',
+												defaultValue: content
+											})
+										);
+									}
+									return React.DOM.td({ key: idx,
+										'data-row': rowidx
+									}, content);
+								})
+							)
+						);
+					})
+				)
+			)
+		);
+	},
+
+
+	_renderButton: function(buttonName, onClickFunc) {
+		return React.DOM.button({
+			onClick: function() { onClickFunc(); },
+			className: 'excel-button'
+		}, buttonName );
 	},
 
 	_savePreviousState: function () {
@@ -92,7 +104,6 @@ var Excel = React.createClass({
 			edit: null, // done editing
 			previousDataState: JSON.parse(JSON.stringify(this.state.data))
 		});
-
 	},
 
 	_undo: function () {
@@ -110,7 +121,6 @@ var Excel = React.createClass({
 			edit: null, // done editing
 			data: JSON.parse(JSON.stringify(this.props.initialData))
 		});
-
 	},
 
 	_save: function (e) {
