@@ -1,6 +1,6 @@
 "use strict";
-/*global document, Counter, _logMixin, ReactDOM, React, report, jslint, console */
-/*jslint nomen: true, debug: true*/
+/*globals Counter */
+
 
 var TextAreaCounter = React.createClass({
 	name: "TextAreaCounter",

@@ -1,10 +1,55 @@
 {
-    "curly": true,
-    "eqnull": true,
-    "eqeqeq": false,
-    "undef": true,
-    "nomen": false,
-    "globals": {
-        "jQuery": true
+    "//comment0"     : "Details https://github.com/jshint/jshint/blob/master/examples/.jshintrc",
+    "//comment1"     : "ENFORCING",
+    "bitwise"       : true,
+    "camelcase"     : false,
+    "curly"         : true,
+    "eqeqeq"        : true,
+    "forin"         : true,
+    "freeze"        : true,
+    "immed"         : false,
+    "latedef"       : false,
+    "newcap"        : false,
+    "noarg"         : true,
+    "noempty"       : true,
+    "nonbsp"        : true,
+    "nonew"         : false,
+    "plusplus"      : false,
+    "quotmark"      : false,
+
+    "undef"         : true,
+    "nomen"         : false,
+
+    "//comment2"    : "Relaxing",
+    "eqnull"        : false,
+    "esversion"     : 5,
+    "evil"          : false,
+    "funcscope"     : false,
+    "globalstrict"  : true,
+    "iterator"      : false,
+    "lastsemic"     : false,
+    "laxbreak"      : false,
+    "laxcomma"      : false,
+    "loopfunc"      : false,
+    "multistr"      : false,
+    "noyield"       : false,
+    "notypeof"      : false,
+    "proto"         : false,
+    "scripturl"     : false,
+    "shadow"        : false,
+    "sub"           : false,
+    "supernew"      : false,
+    "validthis"     : false,
+
+    "//comment3"    : "ENVS",
+    "devel"         : true,
+    "browser"       : true,
+    "jasmine"       : true,
+
+    "globals"       : {
+        "ReactDOM"      : true,
+        "report"        : true,
+        "jQuery"        : true,
+        "React"         : true
     }
 }

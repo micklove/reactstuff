@@ -1,4 +1,3 @@
-/*global console, React, _logMixin */
 "use strict";
 
 var Counter = React.createClass({
