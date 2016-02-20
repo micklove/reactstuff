@@ -10,7 +10,12 @@ var Counter = React.createClass({
 	},
 	render: function () {
 		console.log(this.name + '::render()');
-		return React.DOM.span(null, this.props.count);
+		var div = React.DOM.div(null,
+			React.DOM.h2(null, this.props.count),
+			React.DOM.span({className: "date-box"},
+				new Date().toTimeString()));
+
+		return div;
 	}
 
 	//Don't need this, if using the PureRenderMixin

@@ -1,6 +1,5 @@
-/*globals Counter */
-
-(function() {
+/*globals Counter*/
+(function(Counter) {
 	"use strict";
 
 	var TextAreaCounter = React.createClass({
@@ -52,7 +51,7 @@
 		defaultValue: "Hello World!"
 	}), app);
 
-}());
+}(Counter));
 
 
 
