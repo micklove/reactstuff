@@ -80,6 +80,24 @@
 			);
 		},
 
+		_handleKeyDown: function(event){
+
+			//27 === ESC key
+			if(event.keyCode === 27){
+				this.setState({
+					edit: null // done editing
+				});
+			}
+			//9 === TAB key   (TODO - TAB to Previous/Next cell)
+			else if(event.keyCode === 9){
+				if(event.shiftKey) {
+					console.log('shift tab pressed');
+				} else {
+					console.log('tab pressed');
+				}
+			}
+		},
+
 		/**
 		 * After the user double clicks the cell for edit, the text input,
 		 * named "inputToFocusOn", is visible, but not selected.
@@ -100,6 +118,11 @@
 			if(this.state.edit) {
 				ReactDOM.findDOMNode(this.refs.selectedInputField).select();
 			}
+		},
+
+		componentWillMount:function(){
+			console.log("componentWillMount");
+			document.addEventListener("keydown", this._handleKeyDown, false);
 		},
 
 		_search: function(e) {
